@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Class 01: What is AI? | Miss AI</title>
+<meta name="description" content="A free, step-by-step class for complete beginners: what AI is, getting Claude set up, and making it actually know who you are. 20 minutes, no tech background, costs $0.">
+<meta property="og:title" content="Class 01: What is AI?">
+<meta property="og:description" content="Free 20-minute class: get Claude set up so it actually knows you. No tech background needed.">
+<meta property="og:image" content="cover-01.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600&display=swap">
+<style>
+/* Layout: one narrow column, cover beside the two downloads on desktop, stacked on phones. */
+:root {
+  --bg: #FBF6F2; --surface: #FFFFFF; --ink: #1A1416; --soft: #5C5356; --line: #E9D9D8; --red: #B3212F; --red-ink: #FFFFFF; --blush: #F6E3E4;
+  --display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --body: "Open Sans", "Segoe UI", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #17110F; --surface: #221A19; --ink: #F5ECEA; --soft: #BBAAA8; --line: #3A2D2C; --red: #E0485A; --red-ink: #FFFFFF; --blush: #3A2224; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6;
+  padding: max(24px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(32px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.wrap { max-width: 920px; margin: 0 auto; display: grid; gap: 40px; }
+.brand { font-family: var(--display); font-weight: 800; letter-spacing: 0.22em; font-size: 13px; color: var(--red); text-decoration: none; }
+header { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+header .series { font-family: var(--display); font-weight: 700; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--soft); }
+
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 40px; align-items: start; }
+.kicker { font-family: var(--display); font-weight: 700; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 7vw, 64px); line-height: 1.02; letter-spacing: -0.02em; margin: 8px 0 16px; text-wrap: balance; }
+.lead { font-size: 18px; color: var(--soft); max-width: 34em; margin: 0; }
+.badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.badge { font-family: var(--display); font-weight: 700; font-size: 12px; letter-spacing: 0.06em; border: 1.5px solid var(--ink); border-radius: 999px; padding: 6px 12px; }
+.cover { width: 100%; max-width: 260px; border-radius: 14px; box-shadow: 0 18px 40px -18px rgba(26,20,22,0.45); display: block; }
+
+.downloads h2, .steps h2 { font-family: var(--display); font-weight: 800; font-size: 24px; margin: 0 0 16px; }
+.dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.dl a { display: grid; gap: 6px; text-decoration: none; color: var(--ink); background: var(--surface); border: 1.5px solid var(--line); border-radius: 16px; padding: 22px; transition: border-color .15s, transform .15s; }
+.dl a:hover, .dl a:focus-visible { border-color: var(--red); transform: translateY(-2px); outline: none; }
+.dl a.primary { background: var(--red); border-color: var(--red); color: var(--red-ink); }
+.dl .t { font-family: var(--display); font-weight: 800; font-size: 19px; }
+.dl .d { font-size: 14px; opacity: 0.85; }
+.dl .go { font-family: var(--display); font-weight: 700; font-size: 13px; margin-top: 6px; }
+.hint { font-size: 14px; color: var(--soft); margin: 14px 0 0; }
+
+.steps ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 36px minmax(0,1fr) auto; gap: 14px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+.steps li::before { content: counter(s); width: 32px; height: 32px; border-radius: 50%; background: var(--red); color: var(--red-ink); font-family: var(--display); font-weight: 800; display: grid; place-items: center; font-size: 14px; }
+.steps strong { font-family: var(--display); font-size: 16px; }
+.steps span.m { font-family: var(--display); font-weight: 700; font-size: 12px; color: var(--red); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.steps p { margin: 2px 0 0; font-size: 14px; color: var(--soft); }
+
+.follow { background: var(--blush); border-radius: 18px; padding: 28px; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.follow p { margin: 0; max-width: 32em; }
+.follow strong { font-family: var(--display); font-size: 20px; display: block; margin-bottom: 4px; }
+.follow a { font-family: var(--display); font-weight: 800; text-decoration: none; background: var(--red); color: var(--red-ink); padding: 14px 20px; border-radius: 999px; white-space: nowrap; }
+.follow a:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+footer { font-size: 13px; color: var(--soft); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 20px; }
+
+@media (max-width: 720px) {
+  .hero { grid-template-columns: minmax(0,1fr); }
+  .cover { max-width: 200px; }
+  .dl { grid-template-columns: minmax(0,1fr); }
+  .wrap { gap: 32px; }
+}
+@media (prefers-reduced-motion: reduce) { .dl a { transition: none; } .dl a:hover { transform: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="https://www.instagram.com/realmissai/">MISS AI</a>
+    <span class="series">Claude Made Simple</span>
+  </header>
+
+  <section class="hero">
+    <div>
+      <div class="kicker">Class 01 · Free</div>
+      <h1>What is AI?</h1>
+      <p class="lead">Your first 20 minutes with Claude. Download it, set it up so it actually knows who you are, and get your first genuinely useful answer.</p>
+      <div class="badges"><span class="badge">20 minutes</span><span class="badge">No tech background</span><span class="badge">Costs $0</span></div>
+    </div>
+    <img class="cover" src="cover-01.png" alt="Cover of Class 01: What is AI?" width="260" height="462">
+  </section>
+
+  <section class="downloads">
+    <h2>Get the class</h2>
+    <div class="dl">
+      <a class="primary" href="Miss-AI-Class-01-What-is-AI.pdf" target="_blank" rel="noopener">
+        <span class="t">Read on screen</span>
+        <span class="d">Full colour, sized for your phone or computer. 18 short pages.</span>
+        <span class="go">Open the colour PDF ›</span>
+      </a>
+      <a href="Miss-AI-Class-01-What-is-AI-Print.pdf" target="_blank" rel="noopener">
+        <span class="t">Print it out</span>
+        <span class="d">Printer-friendly A4. White pages, light on ink. 10 pages.</span>
+        <span class="go">Open the print PDF ›</span>
+      </a>
+    </div>
+    <p class="hint">Tip: open the class on the computer you'll use Claude on, so you can copy the prompts straight across.</p>
+  </section>
+
+  <section class="steps">
+    <h2>What you'll do</h2>
+    <ol>
+      <li><div><strong>Download the Claude app</strong><p>Free, on Mac or Windows.</p></div><span class="m">2 MIN</span></li>
+      <li><div><strong>Sign in</strong><p>Creating your account is free.</p></div><span class="m">1 MIN</span></li>
+      <li><div><strong>Take the 60-second tour</strong><p>The only three things you need today.</p></div><span class="m">2 MIN</span></li>
+      <li><div><strong>Let Claude interview you</strong><p>Talk, don't type. It writes your profile for you.</p></div><span class="m">12 MIN</span></li>
+      <li><div><strong>Save it and test it</strong><p>So every new chat starts knowing you.</p></div><span class="m">3 MIN</span></li>
+    </ol>
+  </section>
+
+  <section class="follow">
+    <p><strong>New classes every week</strong>Follow along as I start from zero with AI, and learn with me, one simple class at a time.</p>
+    <a href="https://www.instagram.com/realmissai/" target="_blank" rel="noopener">Follow @realmissai</a>
+  </section>
+
+  <footer><span>Made by Keira, Miss AI</span><span>docs.realmissai.com/class-01-what-is-ai</span></footer>
+</div>
+</body>
+</html>
